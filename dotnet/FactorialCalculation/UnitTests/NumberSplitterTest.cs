@@ -7,7 +7,7 @@ namespace UnitTests
     [TestClass]
     public class NumberSplitterTestTest
     {
-        [TestInitialize]
+        [TestMethod]
         public void TestNumberSplit()
         {
             var splitter = new NumberSplitter();
