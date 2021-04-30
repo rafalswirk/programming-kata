@@ -6,7 +6,11 @@ namespace Mathematics
     {
         public SplittedNumber Split(int number)
         {
-            throw new NotImplementedException();
+            return new SplittedNumber
+            {
+                Decimal = number / 10,
+                Unit = number - (number / 10 * 10)
+            };
         }
     }
 }
