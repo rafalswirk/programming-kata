@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FactorialCalculation
+namespace ConsoleRunner
 {
     class Program
     {
