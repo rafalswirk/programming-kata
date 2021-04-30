@@ -6,7 +6,13 @@ namespace ConsoleRunner
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var input = new string[]
+            {
+                "2",
+                "1",
+                "4"
+            };
+            Console.Write(new SplitDemo().Run(input));
         }
     }
 }
