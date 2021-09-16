@@ -1,4 +1,5 @@
 using System;
+using LastDigitLib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
@@ -7,9 +8,19 @@ namespace UnitTests
     public class TestLastDigitOfPowNumber
     {
         [TestMethod]
-        public void GetLastDigitFromPowNumber()
+        public void CheckInvalidInputNumberOfTestsTest()
         {
-            throw new NotImplementedException();
+            var runner = new LastDigitExtractorRunner();
+            Assert.ThrowsException<ArgumentException>(()=> runner.Run(0));
+            Assert.ThrowsException<ArgumentException>(()=> runner.Run(11));
+            Assert.IsTrue(!string.IsNullOrEmpty(runner.Run(5)));
+        }
+
+        [TestMethod]
+        public void CheckValidInputOfNumberOfTestsTest()
+        {
+            var runner = new LastDigitExtractorRunner();
+            Assert.IsTrue(!string.IsNullOrEmpty(runner.Run(5)));
         }
     }
 }
