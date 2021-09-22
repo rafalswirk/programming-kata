@@ -14,8 +14,9 @@ namespace LastDigitLib
             this.outputData = outputData;
         }
 
-        public string Run(int numberOfTests)
+        public string Run()
         {
+            var numberOfTests = inputData.GetInput();
             if(numberOfTests < 1 || numberOfTests > 10)
                 throw new ArgumentException();
 
