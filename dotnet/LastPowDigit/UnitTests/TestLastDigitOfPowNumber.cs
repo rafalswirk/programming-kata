@@ -10,6 +10,7 @@ namespace UnitTests
     {
         private int numberOfTests;
         private StackInput input;
+        private StringOutput output;
 
         [TestInitialize]
         public void Init()
@@ -21,12 +22,13 @@ namespace UnitTests
             inputData.Push(2);
             numberOfTests = inputData.Count / 2;
             input = new StackInput(inputData);
+            output = new StringOutput();
         }
 
         [TestMethod]
         public void CheckInvalidInputNumberOfTestsTest()
         {
-            var runner = new LastDigitExtractorRunner(input);
+            var runner = new LastDigitExtractorRunner(input, output);
             Assert.ThrowsException<ArgumentException>(()=> runner.Run(0));
             Assert.ThrowsException<ArgumentException>(()=> runner.Run(11));
         }
@@ -34,16 +36,16 @@ namespace UnitTests
         [TestMethod]
         public void CheckValidInputOfNumberOfTestsTest()
         {
-            var runner = new LastDigitExtractorRunner(input);
+            var runner = new LastDigitExtractorRunner(input, output);
             Assert.IsTrue(!string.IsNullOrEmpty(runner.Run(numberOfTests)));
         }
 
         [TestMethod]
         public void CheckIfOutputIsValidTest()
         {
-            var runner = new LastDigitExtractorRunner(input);
-            var output = runner.Run(numberOfTests);
-            Assert.AreEqual($"7{Environment.NewLine}8", output);
+            var runner = new LastDigitExtractorRunner(input, output);
+            var result = runner.Run(numberOfTests);
+            Assert.AreEqual($"7{Environment.NewLine}8", result);
         }
     }
 }
