@@ -8,7 +8,6 @@ namespace UnitTests
     [TestClass]
     public class TestLastDigitOfPowNumber
     {
-        private int numberOfTests;
         private StackInput input;
         private StringOutput output;
 
@@ -21,7 +20,6 @@ namespace UnitTests
             inputData.Push(3);
             inputData.Push(2);
             inputData.Push(2);
-            numberOfTests = inputData.Count / 2;
             input = new StackInput(inputData);
             output = new StringOutput();
         }
