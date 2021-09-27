@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using LastDigitLib.IO;
 
 namespace LastDigitLib
@@ -19,6 +20,14 @@ namespace LastDigitLib
             var numberOfTests = inputData.GetInput();
             if(numberOfTests < 1 || numberOfTests > 10)
                 throw new ArgumentException();
+
+            var rawInput = new StringBuilder();
+            rawInput.AppendLine(numberOfTests.ToString());
+
+            for (int i = 0; i < numberOfTests; i++)
+            {
+                rawInput.AppendLine($"{inputData.GetInput()} {inputData.GetInput()}");
+            }
 
             throw new NotImplementedException();
         }
