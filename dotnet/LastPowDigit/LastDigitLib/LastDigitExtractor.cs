@@ -2,7 +2,7 @@ using System;
 
 namespace LastDigitLib
 {
-    public class LastDigitLib
+    public class LastDigitExtractor
     {
         public string ProcessData(string input)
         {

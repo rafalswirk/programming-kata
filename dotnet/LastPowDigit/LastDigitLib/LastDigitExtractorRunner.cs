@@ -29,7 +29,8 @@ namespace LastDigitLib
                 rawInput.AppendLine($"{inputData.GetInput()} {inputData.GetInput()}");
             }
 
-            throw new NotImplementedException();
+            var extractor = new LastDigitExtractor();
+            return extractor.ProcessData(rawInput.ToString());
         }
     }
 }
