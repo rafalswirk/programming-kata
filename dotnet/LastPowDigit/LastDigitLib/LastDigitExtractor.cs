@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LastDigitLib
@@ -11,10 +13,10 @@ namespace LastDigitLib
             int numberOfTests;
             if(!int.TryParse(splittedValues[0], out numberOfTests))
                 throw new ArgumentException("Invalid number of tests");
-            var results = new StringBuilder();
+            var results = new List<string>(numberOfTests);
             for (int i = 1; i <= numberOfTests; i++)
             {
-                var rawCaseData = splittedValues[i].Trim().Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+                var rawCaseData = splittedValues[i].Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 if(rawCaseData.Length != 2)
                     throw new ArgumentException("Invalid input data for calculating power");
@@ -28,10 +30,10 @@ namespace LastDigitLib
                     throw new ArgumentException($"Cannot read number to be raised to power! Raw data:{rawCaseData[1]}");
 
                 var powResult = (int)Math.Pow(numberToBeRaisedToPower, specificPower);
-                results.AppendLine(powResult.ToString());
+                results.Add(powResult.ToString().Last().ToString());
             }
 
-            return results.ToString();
+            return string.Join(Environment.NewLine, results);
         }
     }
 }

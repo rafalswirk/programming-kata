@@ -48,7 +48,7 @@ namespace UnitTests
         {
             var runner = new LastDigitExtractorRunner(input, output);
             var result = runner.Run();
-            Assert.AreEqual($"7{Environment.NewLine}8", result);
+            Assert.AreEqual($"8{Environment.NewLine}7", result);
         }
     }
 }
