@@ -3,7 +3,7 @@ using Xunit;
 
 namespace StringCompressionLibTests
 {
-    public class UnitTest1
+    public class StringCompressionLibTests
     {
         [Fact]
         public void Test1()
