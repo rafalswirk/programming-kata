@@ -7,14 +7,18 @@ namespace StringCompressionLibTests
 {
     public class StringCompressionLibTests
     {
-        [Fact]
-        public void Test1()
+        [Theory]
+        [InlineData("OPSS", "OPSS")]
+        [InlineData("ABCDEF", "ABCDEF")]
+        [InlineData("ABBCCCDDDDEEEEEFGGHIIJKKKL", "ABBC3D4E5FGGHIIJK3L")]
+        [InlineData("AAAAAAAAAABBBBBBBBBBBBBBBB", "A10B16")]
+        public void CheckCompressionAlgorithm(string textToCompress, string expected)
         {
             var compression = new StringCompression();
 
-            string compressed = compression.Compress("OPSS");
+            string compressed = compression.Compress(textToCompress);
 
-            compressed.Should().Be("OPSS");
+            compressed.Should().Be(expected);
         }
     }
 }
