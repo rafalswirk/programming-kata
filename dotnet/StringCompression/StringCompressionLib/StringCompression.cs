@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace StringCompressionLib
 {
@@ -8,19 +9,50 @@ namespace StringCompressionLib
     {
         public string Compress(string text)
         {
-            var textStack = new Stack<char>();
+            var textStack = new Stack<string>();
             if(text?.Length == 0)
                 return text;
-            textStack.Push(text[0]);
-            int counter = 0;
+            textStack.Push(text[0].ToString());
+            int counter = 1;
             foreach (var character in text.Skip(1))
             {
-                if(character == textStack.Peek())
+                if(character.ToString() == textStack.Peek())
                 {
                     counter++;
                     continue;
                 }
+                if(counter == 1)
+                {
+                    textStack.Push(character.ToString());
+                    counter = 1;
+                    continue;
+                }
+                if(counter == 2)
+                {
+                    textStack.Push(textStack.Peek());
+                    textStack.Push(character.ToString());
+                    counter = 1;
+                    continue;
+                }
+                if(counter > 2)
+                {
+                    textStack.Push(counter.ToString());
+                    //textStack.Push(textStack.Peek());
+                    textStack.Push(character.ToString());
+                    counter = 1;
+                }
             }
+
+            if(counter == 2)
+            {
+                textStack.Push(textStack.Peek());
+            }
+            if(counter > 2)
+            {
+                textStack.Push(counter.ToString());
+            }
+
+            return string.Join("", textStack.Reverse());
         }
     }
 }
