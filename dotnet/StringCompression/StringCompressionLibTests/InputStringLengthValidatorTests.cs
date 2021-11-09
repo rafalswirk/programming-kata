@@ -1,4 +1,5 @@
 using System;
+using StringCompressionLib.Validators;
 using Xunit;
 
 namespace StringCompressionLibTests
@@ -8,7 +9,8 @@ namespace StringCompressionLibTests
         [Fact]
         public void CheckToLongInput()
         {
-            throw new NotImplementedException();
+            var lengthValidator = new InputStringLengthValidator(1, 5);
+            lengthValidator.Validate("aaaaaa");
         }        
 
         [Fact]
