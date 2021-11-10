@@ -13,7 +13,9 @@ namespace StringCompressionLib.Validators
 
         public bool Validate(string input)
         {
-            throw new System.NotImplementedException();
+            if(input.Length < min || input.Length > max)
+                return false;
+            return true;
         }
     }
 }

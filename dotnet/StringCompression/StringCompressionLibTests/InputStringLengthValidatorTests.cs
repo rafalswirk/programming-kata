@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using StringCompressionLib.Validators;
 using Xunit;
 
@@ -9,14 +10,22 @@ namespace StringCompressionLibTests
         [Fact]
         public void CheckToLongInput()
         {
-            var lengthValidator = new InputStringLengthValidator(1, 5);
-            lengthValidator.Validate("aaaaaa");
+            var lengthValidator = new InputStringLengthValidator(2, 5);
+            lengthValidator.Validate("aaaaaa").Should().BeFalse();
         }        
 
         [Fact]
         public void CheckToShortInput()
         {
-            throw new NotImplementedException();
+            var lengthValidator = new InputStringLengthValidator(2, 5);
+            lengthValidator.Validate("a").Should().BeFalse();
+        }
+
+        [Fact]
+        public void CheckValidInput()
+        {
+            var lengthValidator = new InputStringLengthValidator(2, 5);
+            lengthValidator.Validate("aa").Should().BeTrue();
         }
     }
 }
