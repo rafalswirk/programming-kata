@@ -1,6 +1,7 @@
 using System;
 using FluentAssertions;
 using StringCompressionLib;
+using StringCompressionLib.Validators;
 using Xunit;
 
 namespace StringCompressionLibTests
@@ -18,11 +19,30 @@ namespace StringCompressionLibTests
         [InlineData("AAAAAAAAAABBBBBBBBBBBBBBBB", "A10B16")]
         public void CheckCompressionAlgorithm(string textToCompress, string expected)
         {
-            var compression = new StringCompression();
+            var compression = new StringCompression(new IValidator[0]);
 
             string compressed = compression.Compress(textToCompress);
 
             compressed.Should().Be(expected);
+        }
+
+        [Theory]
+        [InlineData("A")]
+        [InlineData("AAAAAA")]
+        public void CheckIfInputValidatorWillThrowExceptionForToLongData(string inptut)
+        {
+            var compression = new StringCompression(new IValidator[]{new InputStringLengthValidator(2, 5)});
+            Assert.Throws<ArgumentException>(()=> compression.Compress(inptut));
+        }
+
+        
+        [Theory]
+        [InlineData("1")]
+        [InlineData("A1AA")]
+        public void CheckIfInputValidatorWillThrowExceptionForNumericData(string inptut)
+        {
+            var compression = new StringCompression(new IValidator[]{new OnlyCharactersValidator()});
+            Assert.Throws<ArgumentException>(()=> compression.Compress(inptut));
         }
     }
 }

@@ -2,13 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using StringCompressionLib.Validators;
 
 namespace StringCompressionLib
 {
     public class StringCompression
     {
+        private readonly IValidator[] validators;
+
+        public StringCompression(IValidator[] validators)
+        {
+            this.validators = validators;
+        }
         public string Compress(string text)
         {
+            if(!validators.All(v => v.Validate(text)))
+                throw new ArgumentException();
             var textStack = new Stack<string>();
             if(text?.Length == 0)
                 return text;
