@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DemoLayout"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Pinable panels" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -23,6 +23,40 @@
             <MenuItem Header="Window"/>
             <MenuItem Header="Help"/>
         </Menu>
-
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Background="Black" Foreground="White" Content="Start page" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2"/>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <GroupBox Header="Start" Grid.Row="0">
+                    <Label Content="..."/>
+                </GroupBox>
+                <GroupBox Header="Recent" Grid.Row="1">
+                    <Label Content="..."/>
+                </GroupBox>
+                <GroupBox Header="Options" Grid.Row="2">
+                    <Label Content="..."/>
+                </GroupBox>
+            </Grid>
+            <GroupBox Header="Lets start" Grid.Row="1" Grid.Column="1">
+                <ListView>
+                    <ListViewItem Content="Item #1"/>
+                    <ListViewItem Content="Item #2"/>
+                    <ListViewItem Content="Item #3"/>
+                    <ListViewItem Content="Item #4"/>
+                </ListView>
+            </GroupBox>
+        </Grid>
     </DockPanel>
 </Window>
