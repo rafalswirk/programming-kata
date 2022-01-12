@@ -23,6 +23,13 @@
             <MenuItem Header="Window"/>
             <MenuItem Header="Help"/>
         </Menu>
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <StackPanel.LayoutTransform>
+                <RotateTransform Angle="90"/>
+            </StackPanel.LayoutTransform>
+            <Button Content="Solution Explorer"/>
+            <Button Content="Tools"/>
+        </StackPanel>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
