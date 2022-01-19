@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="DemoLayout.UserControls.ToolsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DemoLayout.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="DarkGray">
+            <TextBlock Text="Tools" Foreground="WhiteSmoke" VerticalAlignment="Center"/>
+            <Button Margin="0,10,0,10" HorizontalAlignment="Right">
+                <Image Source="/Images/pin_off.png"/>
+            </Button>
+        </Grid>
+        <ListBox Grid.Row="1">
+            <ListViewItem Content="Button"/>
+            <ListViewItem Content="Label"/>
+            <ListViewItem Content="Grid"/>
+            <ListViewItem Content="TextBox"/>
+            <ListViewItem Content="TextBlock"/>
+            <ListViewItem Content="ListBox"/>
+        </ListBox>
+    </Grid>
+</UserControl>

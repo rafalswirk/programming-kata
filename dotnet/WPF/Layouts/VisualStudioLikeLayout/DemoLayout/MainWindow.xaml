@@ -71,6 +71,7 @@
             <!--Layer 1-->
             <Grid>
                 <UserControls:SolutionExplorerPanel Width="200" HorizontalAlignment="Right"/>
+                <UserControls:ToolsPanel Width="200" HorizontalAlignment="Right"/>
             </Grid>
         </Grid>
     </DockPanel>
