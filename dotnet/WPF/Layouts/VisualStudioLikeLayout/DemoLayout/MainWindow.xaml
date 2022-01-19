@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:UserControls="clr-namespace:DemoLayout.UserControls"
         xmlns:local="clr-namespace:DemoLayout"
         mc:Ignorable="d"
         Title="Pinable panels" Height="450" Width="800">
@@ -31,39 +32,46 @@
             <Button Content="Tools"/>
         </StackPanel>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Label Background="Black" Foreground="White" Content="Start page" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2"/>
-            <Grid Grid.Row="1" Grid.Column="0">
+            <!--Layer 0-->
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <GroupBox Header="Start" Grid.Row="0">
-                    <Label Content="..."/>
-                </GroupBox>
-                <GroupBox Header="Recent" Grid.Row="1">
-                    <Label Content="..."/>
-                </GroupBox>
-                <GroupBox Header="Options" Grid.Row="2">
-                    <Label Content="..."/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Background="Black" Foreground="White" Content="Start page" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Start" Grid.Row="0">
+                        <Label Content="..."/>
+                    </GroupBox>
+                    <GroupBox Header="Recent" Grid.Row="1">
+                        <Label Content="..."/>
+                    </GroupBox>
+                    <GroupBox Header="Options" Grid.Row="2">
+                        <Label Content="..."/>
+                    </GroupBox>
+                </Grid>
+                <GroupBox Header="Lets start" Grid.Row="1" Grid.Column="1">
+                    <ListView>
+                        <ListViewItem Content="Item #1"/>
+                        <ListViewItem Content="Item #2"/>
+                        <ListViewItem Content="Item #3"/>
+                        <ListViewItem Content="Item #4"/>
+                    </ListView>
                 </GroupBox>
             </Grid>
-            <GroupBox Header="Lets start" Grid.Row="1" Grid.Column="1">
-                <ListView>
-                    <ListViewItem Content="Item #1"/>
-                    <ListViewItem Content="Item #2"/>
-                    <ListViewItem Content="Item #3"/>
-                    <ListViewItem Content="Item #4"/>
-                </ListView>
-            </GroupBox>
+            <!--Layer 1-->
+            <Grid>
+                <UserControls:SolutionExplorerPanel Width="200" HorizontalAlignment="Right"/>
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>

@@ -6,5 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Images\pin.png" />
+    <Resource Include="Images\pin_off.png" />
+  </ItemGroup>
 
 </Project>
