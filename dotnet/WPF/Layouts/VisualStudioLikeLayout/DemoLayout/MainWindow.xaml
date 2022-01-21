@@ -31,47 +31,57 @@
             <Button Content="Solution Explorer"/>
             <Button Content="Tools"/>
         </StackPanel>
-        <Grid>
+        <Grid Grid.IsSharedSizeScope="True">
             <!--Layer 0-->
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PanelSizeGroup"/>
                 </Grid.ColumnDefinitions>
-                <Label Background="Black" Foreground="White" Content="Start page" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2"/>
-                <Grid Grid.Row="1" Grid.Column="0">
+                <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="60"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <GroupBox Header="Start" Grid.Row="0">
-                        <Label Content="..."/>
-                    </GroupBox>
-                    <GroupBox Header="Recent" Grid.Row="1">
-                        <Label Content="..."/>
-                    </GroupBox>
-                    <GroupBox Header="Options" Grid.Row="2">
-                        <Label Content="..."/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Background="Black" Foreground="White" Content="Start page" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Header="Start" Grid.Row="0">
+                            <Label Content="..."/>
+                        </GroupBox>
+                        <GroupBox Header="Recent" Grid.Row="1">
+                            <Label Content="..."/>
+                        </GroupBox>
+                        <GroupBox Header="Options" Grid.Row="2">
+                            <Label Content="..."/>
+                        </GroupBox>
+                    </Grid>
+                    <GroupBox Header="Lets start" Grid.Row="1" Grid.Column="1">
+                        <ListView>
+                            <ListViewItem Content="Item #1"/>
+                            <ListViewItem Content="Item #2"/>
+                            <ListViewItem Content="Item #3"/>
+                            <ListViewItem Content="Item #4"/>
+                        </ListView>
                     </GroupBox>
                 </Grid>
-                <GroupBox Header="Lets start" Grid.Row="1" Grid.Column="1">
-                    <ListView>
-                        <ListViewItem Content="Item #1"/>
-                        <ListViewItem Content="Item #2"/>
-                        <ListViewItem Content="Item #3"/>
-                        <ListViewItem Content="Item #4"/>
-                    </ListView>
-                </GroupBox>
             </Grid>
             <!--Layer 1-->
             <Grid>
-                <UserControls:SolutionExplorerPanel Width="200" HorizontalAlignment="Right"/>
-                <UserControls:ToolsPanel Width="200" HorizontalAlignment="Right"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PanelSizeGroup"/>
+                </Grid.ColumnDefinitions>
+                <UserControls:SolutionExplorerPanel Grid.Column="1"/>
+                <GridSplitter Grid.Column="0" Width="5"/>
             </Grid>
         </Grid>
     </DockPanel>
