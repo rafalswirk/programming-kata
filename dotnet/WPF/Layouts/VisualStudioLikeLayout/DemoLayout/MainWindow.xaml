@@ -28,12 +28,12 @@
             <StackPanel.LayoutTransform>
                 <RotateTransform Angle="90"/>
             </StackPanel.LayoutTransform>
-            <Button Content="Solution Explorer"/>
-            <Button Content="Tools"/>
+            <Button Name="btnSolutionExplorer" Content="Solution Explorer" MouseEnter="btnSolutionExplorer_MouseEnter"/>
+            <Button Name="btnTools" Content="Tools" MouseEnter="btnTools_MouseEnter"/>
         </StackPanel>
         <Grid Grid.IsSharedSizeScope="True">
             <!--Layer 0-->
-            <Grid>
+            <Grid Name="grdMain" MouseEnter="grdMain_MouseEnter">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PanelSizeGroup"/>
@@ -74,7 +74,7 @@
                     </GroupBox>
                 </Grid>
             </Grid>
-            <!--Layer 1-->
+            <!--Layer 1 - pinned panels-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -82,6 +82,13 @@
                 </Grid.ColumnDefinitions>
                 <UserControls:SolutionExplorerPanel Grid.Column="1"/>
                 <GridSplitter Grid.Column="0" Width="5"/>
+            </Grid>
+            <!--Layer 2 - not pinned panels-->
+            <Grid Name="grdShowUnpinned" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
             </Grid>
         </Grid>
     </DockPanel>
