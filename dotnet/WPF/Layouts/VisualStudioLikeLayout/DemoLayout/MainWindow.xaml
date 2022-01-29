@@ -86,7 +86,7 @@
             <!--Layer 2 - not pinned panels-->
             <Grid Name="grdShowUnpinned" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
             </Grid>

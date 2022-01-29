@@ -21,12 +21,17 @@ namespace DemoLayout
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const double DefaultPanelWidth = 200;
+
         private readonly SolutionExplorerPanel solutionExplorerPanel = new();
         private readonly ToolsPanel toolsPanel = new();
+        private Dictionary<UIElement, double> panelWidths = new Dictionary<UIElement, double>();
 
         public MainWindow()
         {
             InitializeComponent();
+            panelWidths.Add(solutionExplorerPanel, DefaultPanelWidth);
+            panelWidths.Add(toolsPanel, DefaultPanelWidth);
         }
 
         private void btnSolutionExplorer_MouseEnter(object sender, MouseEventArgs e)
@@ -36,13 +41,13 @@ namespace DemoLayout
 
         private void ShowUnpinnedPanel(UserControl panel)
         {
-            grdShowUnpinned.Children.Clear();
+            CleanupGrid();
             var gridSplitter = new GridSplitter();
-            gridSplitter.Background = Brushes.CadetBlue;
             gridSplitter.Width = 5;
             Grid.SetColumn(gridSplitter, 0);
             grdShowUnpinned.Children.Add(gridSplitter);
             Grid.SetColumn(panel, 1);
+            grdShowUnpinned.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
             grdShowUnpinned.Children.Add(panel);
         }
 
@@ -53,7 +58,16 @@ namespace DemoLayout
 
         private void grdMain_MouseEnter(object sender, MouseEventArgs e)
         {
-            grdShowUnpinned.Children.Clear();
+            CleanupGrid();
+        }
+
+        private void CleanupGrid()
+        {
+            if (grdShowUnpinned.Children.Count > 0)
+            {
+                panelWidths[grdShowUnpinned.Children[1]] = grdShowUnpinned.ColumnDefinitions[1].Width.Value;
+                grdShowUnpinned.Children.Clear();
+            }
         }
     }
 }
