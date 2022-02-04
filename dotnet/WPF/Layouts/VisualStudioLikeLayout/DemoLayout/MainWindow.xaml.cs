@@ -42,13 +42,14 @@ namespace DemoLayout
         private void ShowUnpinnedPanel(UserControl panel)
         {
             CleanupGrid();
+            grdShowUnpinned.Children.Add(panel);
+            grdShowUnpinned.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
             var gridSplitter = new GridSplitter();
             gridSplitter.Width = 5;
-            Grid.SetColumn(gridSplitter, 0);
+            gridSplitter.HorizontalAlignment = HorizontalAlignment.Left;
+            Grid.SetColumn(gridSplitter, 1);
             grdShowUnpinned.Children.Add(gridSplitter);
             Grid.SetColumn(panel, 1);
-            grdShowUnpinned.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
-            grdShowUnpinned.Children.Add(panel);
         }
 
         private void btnTools_MouseEnter(object sender, MouseEventArgs e)
