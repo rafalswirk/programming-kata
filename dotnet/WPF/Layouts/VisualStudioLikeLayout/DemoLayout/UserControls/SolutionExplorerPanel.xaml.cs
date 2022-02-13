@@ -18,10 +18,8 @@ namespace DemoLayout.UserControls
     /// <summary>
     /// Interaction logic for SolutionExplorerPanel.xaml
     /// </summary>
-    public partial class SolutionExplorerPanel : UserControl
+    public partial class SolutionExplorerPanel : PinablePanelBase
     {
-        public event EventHandler? OnPinClicked;
-
         public SolutionExplorerPanel()
         {
             InitializeComponent();
@@ -29,7 +27,7 @@ namespace DemoLayout.UserControls
 
         private void btnPin_Click(object sender, RoutedEventArgs e)
         {
-            OnPinClicked?.Invoke(this, new EventArgs());
+            FireOnPinClicked();
         }
     }
 }

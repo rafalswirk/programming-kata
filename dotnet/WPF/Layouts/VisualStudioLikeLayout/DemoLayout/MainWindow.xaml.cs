@@ -43,6 +43,7 @@ namespace DemoLayout
             {
                 CleanupGrid();
                 PinPanel(panel);
+
             }
             else
             {

@@ -18,10 +18,8 @@ namespace DemoLayout.UserControls
     /// <summary>
     /// Interaction logic for ToolsPanel.xaml
     /// </summary>
-    public partial class ToolsPanel : UserControl
+    public partial class ToolsPanel : PinablePanelBase
     {
-        public event EventHandler? OnPinClicked;
-
         public ToolsPanel()
         {
             InitializeComponent();
@@ -29,7 +27,7 @@ namespace DemoLayout.UserControls
 
         private void btnPin_Click(object sender, RoutedEventArgs e)
         {
-            OnPinClicked?.Invoke(this, new EventArgs());
+            FireOnPinClicked();
         }
     }
 }
