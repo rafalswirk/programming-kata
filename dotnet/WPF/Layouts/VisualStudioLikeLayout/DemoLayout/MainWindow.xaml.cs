@@ -1,4 +1,5 @@
-﻿using DemoLayout.UserControls;
+﻿using DemoLayout.Converters;
+using DemoLayout.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,11 +31,19 @@ namespace DemoLayout
         public MainWindow()
         {
             InitializeComponent();
-            panelWidths.Add(solutionExplorerPanel, DefaultPanelWidth);
-            panelWidths.Add(toolsPanel, DefaultPanelWidth);
+            
+            InitializePanel(solutionExplorerPanel, btnSolutionExplorer);
+            InitializePanel(toolsPanel, btnTools);
+        }
 
-            solutionExplorerPanel.OnPinClicked += Panel_OnPinClicked;
-            toolsPanel.OnPinClicked += Panel_OnPinClicked;
+        private void InitializePanel(PinablePanelBase panel, Button button)
+        {
+            panelWidths.Add(panel, DefaultPanelWidth);
+            panel.OnPinClicked += Panel_OnPinClicked;
+            var binding = new Binding("IsPinned");
+            binding.Source = panel;
+            binding.Converter = new BoolToCollapsed();
+            button.SetBinding(VisibilityProperty, binding);
         }
 
         private void Panel_OnPinClicked(object? sender, EventArgs e)
