@@ -20,9 +20,16 @@ namespace DemoLayout.UserControls
     /// </summary>
     public partial class ToolsPanel : UserControl
     {
+        public event EventHandler? OnPinClicked;
+
         public ToolsPanel()
         {
             InitializeComponent();
+        }
+
+        private void btnPin_Click(object sender, RoutedEventArgs e)
+        {
+            OnPinClicked?.Invoke(this, new EventArgs());
         }
     }
 }

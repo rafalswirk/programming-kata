@@ -32,6 +32,27 @@ namespace DemoLayout
             InitializeComponent();
             panelWidths.Add(solutionExplorerPanel, DefaultPanelWidth);
             panelWidths.Add(toolsPanel, DefaultPanelWidth);
+
+            solutionExplorerPanel.OnPinClicked += Panel_OnPinClicked;
+            toolsPanel.OnPinClicked += Panel_OnPinClicked;
+        }
+
+        private void Panel_OnPinClicked(object? sender, EventArgs e)
+        {
+            if (sender is UIElement panel && grdShowUnpinned.Children.Contains(panel))
+            {
+                CleanupGrid();
+                PinPanel(panel);
+            }
+            else
+            {
+                //UnpinPanel();
+            }
+        }
+
+        private void PinPanel(UIElement panel)
+        {
+            grdShowPinned.Children.Add(panel);
         }
 
         private void btnSolutionExplorer_MouseEnter(object sender, MouseEventArgs e)
@@ -41,6 +62,8 @@ namespace DemoLayout
 
         private void ShowUnpinnedPanel(UserControl panel)
         {
+            if (grdShowPinned.Children.Contains(panel))
+                return;
             CleanupGrid();
             grdShowUnpinned.Children.Add(panel);
             grdShowUnpinned.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);

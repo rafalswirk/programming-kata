@@ -75,13 +75,11 @@
                 </Grid>
             </Grid>
             <!--Layer 1 - pinned panels-->
-            <Grid>
+            <Grid Name="grdShowPinned">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="PanelSizeGroup"/>
                 </Grid.ColumnDefinitions>
-                <UserControls:SolutionExplorerPanel Grid.Column="1"/>
-                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Left"/>
             </Grid>
             <!--Layer 2 - not pinned panels-->
             <Grid Name="grdShowUnpinned">

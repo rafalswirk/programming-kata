@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="DarkGray">
             <TextBlock Text="Tools" Foreground="WhiteSmoke" VerticalAlignment="Center"/>
-            <Button Margin="0,10,0,10" HorizontalAlignment="Right">
+            <Button Name="btnPin" Margin="0,10,0,10" HorizontalAlignment="Right" Click="btnPin_Click">
                 <Image Source="/Images/pin_off.png"/>
             </Button>
         </Grid>
