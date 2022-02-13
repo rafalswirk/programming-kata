@@ -24,7 +24,7 @@ namespace DemoLayout.UserControls
 
         protected void FireOnPinClicked()
         {
-            IsPinned = true;
+            IsPinned = !IsPinned;
             OnPinClicked?.Invoke(this, new EventArgs());
         }
     }

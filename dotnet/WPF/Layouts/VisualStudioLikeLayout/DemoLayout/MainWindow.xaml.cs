@@ -48,7 +48,10 @@ namespace DemoLayout
 
         private void Panel_OnPinClicked(object? sender, EventArgs e)
         {
-            if (sender is UIElement panel && grdShowUnpinned.Children.Contains(panel))
+            var panel = sender as PinablePanelBase;
+            if (panel == null)
+                return;
+            if (grdShowUnpinned.Children.Contains(panel) && panel.IsPinned)
             {
                 CleanupGrid();
                 PinPanel(panel);
@@ -56,8 +59,13 @@ namespace DemoLayout
             }
             else
             {
-                //UnpinPanel();
+                UnpinPanel(panel);
             }
+        }
+
+        private void UnpinPanel(UIElement panel)
+        {
+            grdShowPinned.Children.Remove(panel);
         }
 
         private void PinPanel(UIElement panel)
