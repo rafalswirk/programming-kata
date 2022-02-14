@@ -22,8 +22,6 @@ namespace DemoLayout
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const double DefaultPanelWidth = 200;
-
         private readonly SolutionExplorerPanel solutionExplorerPanel = new();
         private readonly ToolsPanel toolsPanel = new();
         private Dictionary<UIElement, double> panelWidths = new Dictionary<UIElement, double>();
@@ -38,7 +36,7 @@ namespace DemoLayout
 
         private void InitializePanel(PinablePanelBase panel, Button button)
         {
-            panelWidths.Add(panel, DefaultPanelWidth);
+            panelWidths.Add(panel, PanelManager.DefaultPanelWidth);
             panel.OnPinClicked += Panel_OnPinClicked;
             var binding = new Binding("IsPinned");
             binding.Source = panel;
