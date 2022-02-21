@@ -1,9 +1,13 @@
-﻿using System;
+﻿using DemoLayout.Converters;
+using DemoLayout.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace DemoLayout
 {
@@ -11,11 +15,75 @@ namespace DemoLayout
     {
         public const double DefaultPanelWidth = 200;
 
-        private readonly Grid layer;
+        private Dictionary<UIElement, double> panelWidths = new Dictionary<UIElement, double>();
+        private readonly Grid _pinnedLayer;
+        private readonly Grid _unpinnedLayer;
 
-        public PanelManager(Grid layer)
+        internal PanelManager(Grid pinnedLayer, Grid unpinnedLayer)
         {
-            this.layer = layer;
+            _pinnedLayer = pinnedLayer;
+            _unpinnedLayer = unpinnedLayer;
+        }
+
+        internal void RegisterPanel(PinablePanelBase panel, Button panelButton)
+        {
+            panelWidths.Add(panel, PanelManager.DefaultPanelWidth);
+            panel.OnPinClicked += Panel_OnPinClicked;
+            var binding = new Binding("IsPinned");
+            binding.Source = panel;
+            binding.Converter = new BoolToCollapsed();
+            panelButton.SetBinding(Button.VisibilityProperty, binding);
+        }
+
+        internal void ShowUnpinnedPanel(UserControl panel)
+        {
+            if (_unpinnedLayer.Children.Contains(panel))
+                return;
+            CleanupGrid();
+            _unpinnedLayer.Children.Add(panel);
+            _unpinnedLayer.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
+            var gridSplitter = new GridSplitter();
+            gridSplitter.Width = 5;
+            gridSplitter.HorizontalAlignment = HorizontalAlignment.Left;
+            Grid.SetColumn(gridSplitter, 1);
+            _unpinnedLayer.Children.Add(gridSplitter);
+            Grid.SetColumn(panel, 1);
+        }
+
+        internal void CleanupGrid()
+        {
+            if (_unpinnedLayer.Children.Count > 0)
+            {
+                panelWidths[_unpinnedLayer.Children[1]] = _unpinnedLayer.ColumnDefinitions[1].Width.Value;
+                _unpinnedLayer.Children.Clear();
+            }
+        }
+
+        private void Panel_OnPinClicked(object? sender, EventArgs e)
+        {
+            var panel = sender as PinablePanelBase;
+            if (panel == null)
+                return;
+            if (_unpinnedLayer.Children.Contains(panel) && panel.IsPinned)
+            {
+                CleanupGrid();
+                PinPanel(panel);
+
+            }
+            else
+            {
+                UnpinPanel(panel);
+            }
+        }
+
+        private void UnpinPanel(UIElement panel)
+        {
+            _pinnedLayer.Children.Remove(panel);
+        }
+
+        private void PinPanel(UIElement panel)
+        {
+            _pinnedLayer.Children.Add(panel);
         }
     }
 }
