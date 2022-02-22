@@ -78,7 +78,6 @@
             <Grid Name="grdShowPinned">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto" SharedSizeGroup="PanelSizeGroup"/>
                 </Grid.ColumnDefinitions>
             </Grid>
             <!--Layer 2 - not pinned panels-->

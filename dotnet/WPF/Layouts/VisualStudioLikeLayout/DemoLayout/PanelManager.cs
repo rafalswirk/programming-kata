@@ -83,11 +83,16 @@ namespace DemoLayout
 
         private void UnpinPanel(UIElement panel)
         {
-            _pinnedLayer.Children.Remove(panel);
+            _pinnedLayer.Children.Clear();
+            _pinnedLayer.ColumnDefinitions.RemoveAt(1);
         }
 
         private void PinPanel(UserControl panel)
         {
+            var columnDefinition = new ColumnDefinition();
+            columnDefinition.SharedSizeGroup = "PanelSizeGroup";
+            _pinnedLayer.ColumnDefinitions.Add(columnDefinition);
+
             _pinnedLayer.Children.Add(panel);
             _pinnedLayer.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
             var gridSplitter = new GridSplitter();
