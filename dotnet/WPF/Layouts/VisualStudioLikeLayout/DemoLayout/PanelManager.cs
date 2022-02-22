@@ -40,13 +40,18 @@ namespace DemoLayout
             if (_unpinnedLayer.Children.Contains(panel))
                 return;
             CleanupGrid();
-            _unpinnedLayer.Children.Add(panel);
-            _unpinnedLayer.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
+            ShowPanel(panel, _unpinnedLayer);
+        }
+
+        private void ShowPanel(UserControl panel, Grid layer)
+        {
+            layer.Children.Add(panel);
+            layer.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
             var gridSplitter = new GridSplitter();
             gridSplitter.Width = 5;
             gridSplitter.HorizontalAlignment = HorizontalAlignment.Left;
             Grid.SetColumn(gridSplitter, 1);
-            _unpinnedLayer.Children.Add(gridSplitter);
+            layer.Children.Add(gridSplitter);
             Grid.SetColumn(panel, 1);
         }
 
@@ -81,9 +86,16 @@ namespace DemoLayout
             _pinnedLayer.Children.Remove(panel);
         }
 
-        private void PinPanel(UIElement panel)
+        private void PinPanel(UserControl panel)
         {
             _pinnedLayer.Children.Add(panel);
+            _pinnedLayer.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
+            var gridSplitter = new GridSplitter();
+            gridSplitter.Width = 5;
+            gridSplitter.HorizontalAlignment = HorizontalAlignment.Left;
+            Grid.SetColumn(gridSplitter, 1);
+            _pinnedLayer.Children.Add(gridSplitter);
+            Grid.SetColumn(panel, 1);
         }
     }
 }
