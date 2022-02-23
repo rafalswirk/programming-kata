@@ -18,6 +18,7 @@ namespace DemoLayout
         private Dictionary<UIElement, double> panelWidths = new Dictionary<UIElement, double>();
         private readonly Grid _pinnedLayer;
         private readonly Grid _unpinnedLayer;
+        private readonly List<PinnedPanelInfo> _panels = new List<PinnedPanelInfo>();
 
         internal PanelManager(Grid pinnedLayer, Grid unpinnedLayer)
         {
@@ -83,11 +84,14 @@ namespace DemoLayout
 
         private void UnpinPanel(UIElement panel)
         {
-            _pinnedLayer.Children.Clear();
-            _pinnedLayer.ColumnDefinitions.RemoveAt(1);
+            var panelToRemove = _panels.Single(info => info.Panel == panel);
+            _pinnedLayer.Children.Remove(panelToRemove.Panel);
+            _pinnedLayer.Children.Remove(panelToRemove.PanelSplitter);
+            _pinnedLayer.ColumnDefinitions.Remove(panelToRemove.Definition);
+            _panels.Remove(panelToRemove);
         }
 
-        private void PinPanel(UserControl panel)
+        private void PinPanel(PinablePanelBase panel)
         {
             var columnDefinition = new ColumnDefinition();
             columnDefinition.SharedSizeGroup = "PanelSizeGroup";
@@ -98,9 +102,16 @@ namespace DemoLayout
             var gridSplitter = new GridSplitter();
             gridSplitter.Width = 5;
             gridSplitter.HorizontalAlignment = HorizontalAlignment.Left;
-            Grid.SetColumn(gridSplitter, 1);
+            Grid.SetColumn(gridSplitter, _panels.Count + 1);
             _pinnedLayer.Children.Add(gridSplitter);
-            Grid.SetColumn(panel, 1);
+            Grid.SetColumn(panel, _panels.Count + 1);
+
+            _panels.Add(new PinnedPanelInfo 
+            {
+                Panel = panel,
+                PanelSplitter = gridSplitter,
+                Definition = columnDefinition
+            });
         }
     }
 }
