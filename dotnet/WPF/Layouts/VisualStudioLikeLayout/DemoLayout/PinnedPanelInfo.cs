@@ -13,5 +13,6 @@ namespace DemoLayout
         public PinablePanelBase Panel { get; set; }
         public GridSplitter PanelSplitter { get; set; }
         public ColumnDefinition Definition { get; set; }
+        public ColumnDefinition SplitterColumn { get; internal set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace DemoLayout
 {
@@ -16,6 +17,9 @@ namespace DemoLayout
         public const double DefaultPanelWidth = 200;
 
         private Dictionary<UIElement, double> panelWidths = new Dictionary<UIElement, double>();
+        private bool _firstColumn = true;
+        private Grid _pinnedPanelContainer;
+        private GridSplitter _pinnedPanelContainerSplitter;
         private readonly Grid _pinnedLayer;
         private readonly Grid _unpinnedLayer;
         private readonly List<PinnedPanelInfo> _panels = new List<PinnedPanelInfo>();
@@ -47,7 +51,7 @@ namespace DemoLayout
         private void ShowPanel(UserControl panel, Grid layer)
         {
             layer.Children.Add(panel);
-            layer.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
+            layer.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel], GridUnitType.Pixel);
             var gridSplitter = new GridSplitter();
             gridSplitter.Width = 5;
             gridSplitter.HorizontalAlignment = HorizontalAlignment.Left;
@@ -85,33 +89,98 @@ namespace DemoLayout
         private void UnpinPanel(UIElement panel)
         {
             var panelToRemove = _panels.Single(info => info.Panel == panel);
-            _pinnedLayer.Children.Remove(panelToRemove.Panel);
-            _pinnedLayer.Children.Remove(panelToRemove.PanelSplitter);
-            _pinnedLayer.ColumnDefinitions.Remove(panelToRemove.Definition);
             _panels.Remove(panelToRemove);
+            _pinnedPanelContainer.Children.Remove(panelToRemove.Panel);
+            if (panelToRemove.PanelSplitter != null)
+                _pinnedPanelContainer.Children.Remove(panelToRemove.PanelSplitter);
+            if (panelToRemove.SplitterColumn != null)
+                _pinnedPanelContainer.ColumnDefinitions.Remove(panelToRemove.SplitterColumn);
+            _pinnedPanelContainer.ColumnDefinitions.Remove(panelToRemove.Definition);
+
+            if (_panels.Count == 1)
+                RemoveSplitterForSinglePanel();
+            if (_panels.Count == 0)
+                CleanupPinnableLayer();
+        }
+
+        private void CleanupPinnableLayer()
+        {
+            _pinnedLayer.Children.Remove(_pinnedPanelContainerSplitter);
+            _pinnedLayer.Children.Remove(_pinnedPanelContainer);
+            _pinnedLayer.ColumnDefinitions.Last().Width = new GridLength(0, GridUnitType.Auto);
+        }
+
+        private void RemoveSplitterForSinglePanel()
+        {
+            var panel = _panels.First();
+            _pinnedPanelContainer.Children.Remove(panel.PanelSplitter);
+            panel.PanelSplitter = null;
+
         }
 
         private void PinPanel(PinablePanelBase panel)
         {
-            var columnDefinition = new ColumnDefinition();
-            columnDefinition.SharedSizeGroup = "PanelSizeGroup";
-            _pinnedLayer.ColumnDefinitions.Add(columnDefinition);
+            if(_pinnedPanelContainer == null || _pinnedPanelContainer.ColumnDefinitions.Count == 0)
+            {
+                AddMainContainer();
+                _firstColumn = false;
+                AddPanel(panel, null, null, true);
+                return;
+            }
 
-            _pinnedLayer.Children.Add(panel);
-            _pinnedLayer.ColumnDefinitions[1].Width = new GridLength(panelWidths[panel]);
-            var gridSplitter = new GridSplitter();
-            gridSplitter.Width = 5;
-            gridSplitter.HorizontalAlignment = HorizontalAlignment.Left;
-            Grid.SetColumn(gridSplitter, _panels.Count + 1);
-            _pinnedLayer.Children.Add(gridSplitter);
-            Grid.SetColumn(panel, _panels.Count + 1);
+            var gridSplitterData = GenerateSplitterInNewColumn();
+            AddPanel(panel, gridSplitterData.SplitterColumn, gridSplitterData.Splitter);
+        }
 
-            _panels.Add(new PinnedPanelInfo 
+        private (ColumnDefinition SplitterColumn, GridSplitter Splitter) GenerateSplitterInNewColumn()
+        {
+            var column = new ColumnDefinition();
+            column.Width = new GridLength(5, GridUnitType.Auto);
+            _pinnedPanelContainer.ColumnDefinitions.Add(column);
+            var gridSplitter = new GridSplitter
+            {
+                Width = 5,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            Grid.SetColumn(gridSplitter, _pinnedPanelContainer.ColumnDefinitions.Count - 1);
+            _pinnedPanelContainer.Children.Add(gridSplitter);
+            return (column, gridSplitter);
+        }
+
+        private void AddPanel(PinablePanelBase panel, ColumnDefinition splitterColumn, GridSplitter splitter, bool first = false)
+        {
+            var column = new ColumnDefinition();
+            if (first)
+                column.Width = new GridLength(1, GridUnitType.Star);
+            else
+                column.Width = new GridLength(panelWidths[panel], GridUnitType.Pixel);
+            _pinnedPanelContainer.ColumnDefinitions.Add(column);
+
+            Grid.SetColumn(panel, _pinnedPanelContainer.ColumnDefinitions.Count - 1);
+            _pinnedPanelContainer.Children.Add(panel);
+
+            _panels.Add(new PinnedPanelInfo
             {
                 Panel = panel,
-                PanelSplitter = gridSplitter,
-                Definition = columnDefinition
+                Definition = column,
+                SplitterColumn = splitterColumn,
+                PanelSplitter = splitter
             });
+        }
+
+        private void AddMainContainer()
+        {
+            _pinnedPanelContainerSplitter = new GridSplitter
+            {
+                Width = 5,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            Grid.SetColumn(_pinnedPanelContainerSplitter, 1);
+            _pinnedLayer.Children.Add(_pinnedPanelContainerSplitter);
+
+            _pinnedPanelContainer = new Grid();
+            Grid.SetColumn(_pinnedPanelContainer, 2);
+            _pinnedLayer.Children.Add(_pinnedPanelContainer);
         }
     }
 }

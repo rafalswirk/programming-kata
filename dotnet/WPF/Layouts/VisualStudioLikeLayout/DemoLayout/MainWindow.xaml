@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:DemoLayout"
         mc:Ignorable="d"
         Title="Pinable panels" Height="450" Width="800">
-    <DockPanel>
+    <DockPanel Grid.IsSharedSizeScope="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem Header="Exit"/>
@@ -31,7 +31,7 @@
             <Button Name="btnSolutionExplorer" Content="Solution Explorer" MouseEnter="btnSolutionExplorer_MouseEnter"/>
             <Button Name="btnTools" Content="Tools" MouseEnter="btnTools_MouseEnter"/>
         </StackPanel>
-        <Grid Grid.IsSharedSizeScope="True">
+        <Grid>
             <!--Layer 0-->
             <Grid Name="grdMain" MouseEnter="grdMain_MouseEnter">
                 <Grid.ColumnDefinitions>
@@ -73,12 +73,18 @@
                         </ListView>
                     </GroupBox>
                 </Grid>
+                <Grid Grid.Column="1"/>
             </Grid>
             <!--Layer 1 - pinned panels-->
-            <Grid Name="grdShowPinned">
+            <Grid Name="grdShowPinned" ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PanelSizeGroup"/>
                 </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0"/>
+                <!--<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" Background="Red"/>-->
+                <!--<UserControls:SolutionExplorerPanel Grid.Column="2"/>-->
             </Grid>
             <!--Layer 2 - not pinned panels-->
             <Grid Name="grdShowUnpinned">
