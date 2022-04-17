@@ -1,0 +1,98 @@
+﻿<Window x:Class="DemoLayout.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:UserControls="clr-namespace:DemoLayout.UserControls"
+        xmlns:local="clr-namespace:DemoLayout"
+        mc:Ignorable="d"
+        Title="Pinable panels" Height="450" Width="800">
+    <DockPanel Grid.IsSharedSizeScope="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Edit"/>
+            <MenuItem Header="View"/>
+            <MenuItem Header="Git"/>
+            <MenuItem Header="Project"/>
+            <MenuItem Header="Build"/>
+            <MenuItem Header="Debug"/>
+            <MenuItem Header="Test"/>
+            <MenuItem Header="Tools"/>
+            <MenuItem Header="Extensions"/>
+            <MenuItem Header="Window"/>
+            <MenuItem Header="Help"/>
+        </Menu>
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <StackPanel.LayoutTransform>
+                <RotateTransform Angle="90"/>
+            </StackPanel.LayoutTransform>
+            <Button Name="btnSolutionExplorer" Content="Solution Explorer" MouseEnter="btnSolutionExplorer_MouseEnter"/>
+            <Button Name="btnTools" Content="Tools" MouseEnter="btnTools_MouseEnter"/>
+        </StackPanel>
+        <Grid>
+            <!--Layer 0-->
+            <Grid Name="grdMain" MouseEnter="grdMain_MouseEnter">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="PanelSizeGroup"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Background="Black" Foreground="White" Content="Start page" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Header="Start" Grid.Row="0">
+                            <Label Content="..."/>
+                        </GroupBox>
+                        <GroupBox Header="Recent" Grid.Row="1">
+                            <Label Content="..."/>
+                        </GroupBox>
+                        <GroupBox Header="Options" Grid.Row="2">
+                            <Label Content="..."/>
+                        </GroupBox>
+                    </Grid>
+                    <GroupBox Header="Lets start" Grid.Row="1" Grid.Column="1">
+                        <ListView>
+                            <ListViewItem Content="Item #1"/>
+                            <ListViewItem Content="Item #2"/>
+                            <ListViewItem Content="Item #3"/>
+                            <ListViewItem Content="Item #4"/>
+                        </ListView>
+                    </GroupBox>
+                </Grid>
+                <Grid Grid.Column="1"/>
+            </Grid>
+            <!--Layer 1 - pinned panels-->
+            <Grid Name="grdShowPinned" ShowGridLines="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="auto" SharedSizeGroup="PanelSizeGroup"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0"/>
+                <!--<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Center" Background="Red"/>-->
+                <!--<UserControls:SolutionExplorerPanel Grid.Column="2"/>-->
+            </Grid>
+            <!--Layer 2 - not pinned panels-->
+            <Grid Name="grdShowUnpinned">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
