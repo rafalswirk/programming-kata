@@ -5,8 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ICommandDemo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="ATM" Height="450" Width="400"
+        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow" ResizeMode="CanMinimize"
+        Name="window">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top" Background="DarkGray" Height="60">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="Account limit: " VerticalAlignment="Center"/>
+                <Label Content="{Binding AccountLimit, ElementName=window}" d:Content="128" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel>
+            <TextBox Text="{Binding CashToWithdraw, ElementName=window, UpdateSourceTrigger=PropertyChanged}" Margin="10"/>
+            <Button Content="Withdraw" Command="{Binding WithdrawCommand, ElementName=window}" Margin="10"/>
+        </StackPanel>
+    </DockPanel>
 </Window>
