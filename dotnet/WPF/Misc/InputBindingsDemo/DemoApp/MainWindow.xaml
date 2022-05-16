@@ -7,6 +7,41 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Content="Button" Grid.RowSpan="2" />
+            <Button Content="Button" Grid.Column="1" Grid.RowSpan="2"/>
+            <Button Content="Button" Grid.Column="2" Grid.RowSpan="2"/>
+            <Button Content="Button" Grid.Column="3" Grid.RowSpan="2"/>
+        </Grid>
+        <Grid Visibility="Visible" ShowGridLines="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
 
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Grid.ColumnSpan="2" Background="Red" Margin="10 0 10 0"/>
+            <Button Grid.Column="3" Grid.ColumnSpan="2" Background="Red" Margin="10 0 10 0"/>
+            <Button Grid.Column="5" Grid.ColumnSpan="2" Background="Red" Margin="10 0 10 0"/>
+        </Grid>
     </Grid>
 </Window>
