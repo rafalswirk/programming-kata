@@ -43,10 +43,9 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Content="Wolf" Command="{Binding WolfSound, ElementName=window}" Grid.RowSpan="2"/>
-
-            <Button Content="Button" Grid.Column="1" Grid.RowSpan="2"/>
-            <Button Content="Button" Grid.Column="2" Grid.RowSpan="2"/>
-            <Button Content="Button" Grid.Column="3" Grid.RowSpan="2"/>
+            <Button Content="Bee" Command="{Binding BeeSound, ElementName=window}" Grid.Column="1" Grid.RowSpan="2"/>
+            <Button Content="Donkey" Command="{Binding DonkeySound, ElementName=window}" Grid.Column="2" Grid.RowSpan="2"/>
+            <Button Content="Frog" Command="{Binding FrogSound, ElementName=window}" Grid.Column="3" Grid.RowSpan="2"/>
         </Grid>
         <Grid Visibility="Visible" ShowGridLines="False" Margin="0 -10 0 0" >
             <Grid.RowDefinitions>
@@ -63,9 +62,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Grid.ColumnSpan="2" Background="Red" Margin="10 0 10 0"/>
-            <Button Grid.Column="3" Grid.ColumnSpan="2" Background="Red" Margin="10 0 10 0"/>
-            <Button Grid.Column="5" Grid.ColumnSpan="2" Background="Red" Margin="10 0 10 0"/>
+            <Button Content="Lion" Command="{Binding LionSound, ElementName=window}" Grid.Column="1" Grid.ColumnSpan="2" Background="DarkGray" Margin="10 0 10 0"/>
+            <Button Content="Owl" Command="{Binding OwlSound, ElementName=window}" Grid.Column="3" Grid.ColumnSpan="2" Background="DarkGray" Margin="10 0 10 0"/>
+            <Button Content="Cat" Command="{Binding CatSound, ElementName=window}" Grid.Column="5" Grid.ColumnSpan="2" Background="DarkGray" Margin="10 0 10 0"/>
         </Grid>
     </Grid>
 </Window>
