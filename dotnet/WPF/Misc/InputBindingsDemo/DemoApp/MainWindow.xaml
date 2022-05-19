@@ -9,6 +9,12 @@
         Name="window">
     <Window.InputBindings>
         <KeyBinding Command="{Binding ElementName=window, Path=WolfSound}" Key="W"/>
+        <KeyBinding Command="{Binding ElementName=window, Path=BeeSound}" Key="B"/>
+        <KeyBinding Command="{Binding ElementName=window, Path=CatSound}" Key="C"/>
+        <KeyBinding Command="{Binding ElementName=window, Path=DonkeySound}" Key="D"/>
+        <KeyBinding Command="{Binding ElementName=window, Path=FrogSound}" Key="F"/>
+        <KeyBinding Command="{Binding ElementName=window, Path=LionSound}" Key="L"/>
+        <KeyBinding Command="{Binding ElementName=window, Path=OwlSound}" Key="O"/>
     </Window.InputBindings>
     <Window.Resources>
         <Style TargetType="Button">
