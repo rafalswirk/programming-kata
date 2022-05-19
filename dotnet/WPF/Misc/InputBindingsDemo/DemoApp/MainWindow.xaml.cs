@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,17 @@ namespace DemoApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        MediaPlayer mediaElement = new MediaPlayer();
+
+        public RelayCommand WolfSound { get; set; }
         public MainWindow()
         {
+            WolfSound = new RelayCommand(() =>
+            {
+                mediaElement.Open(new Uri(@"AnimalSounds\wolf.mp3", UriKind.Relative));
+                mediaElement.Play();
+            });
+            
             InitializeComponent();
         }
     }
