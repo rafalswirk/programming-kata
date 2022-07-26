@@ -1,3 +1,5 @@
+using SumOfPerfectSquaresLib;
+
 namespace SumOfPerfectSquaresTests;
 
 public class Tests
@@ -10,6 +12,8 @@ public class Tests
     [Test]
     public void Test1()
     {
-        Assert.Pass();
+        Assert.AreEqual(2, SumOfSquares.NSquaresFor(17));
+        Assert.AreEqual(4, SumOfSquares.NSquaresFor(15));
+        Assert.AreEqual(1, SumOfSquares.NSquaresFor(16));
     }
 }
