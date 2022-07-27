@@ -10,10 +10,11 @@ public class Tests
     }
 
     [Test]
-    public void Test1()
+    [TestCase(2, 17)]
+    [TestCase(4, 15)]
+    [TestCase(1, 16)]
+    public void Test1(int expected, int input)
     {
-        Assert.AreEqual(2, SumOfSquares.NSquaresFor(17));
-        Assert.AreEqual(4, SumOfSquares.NSquaresFor(15));
-        Assert.AreEqual(1, SumOfSquares.NSquaresFor(16));
+        Assert.AreEqual(expected, SumOfSquares.NSquaresFor(input));
     }
 }
