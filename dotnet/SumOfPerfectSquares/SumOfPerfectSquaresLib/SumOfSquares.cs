@@ -3,19 +3,34 @@ public static class SumOfSquares
 {
     public static int NSquaresFor(int i)
     {
+        var squares = new List<int>();
         var currentValue = i;
-        var squaresNumber = 0;
-        while (currentValue > 1)
+        var squaresSum = 0;
+        while (squaresSum - i != 0)
         {
-            var sqrt = Math.Sqrt(currentValue);
-            if (int.TryParse(sqrt.ToString(), out int intValue))
-                return ++squaresNumber;
+            if (squaresSum < 0)
+                throw new InvalidOperationException();
+            if (IsSqure(currentValue))
+            {
+                squares.Add(currentValue);
+                squaresSum += currentValue;
+                currentValue = i - squaresSum;
+                continue;
+            }
 
-            currentValue -= (int)Math.Pow((int)sqrt, 2);
-            squaresNumber++;
+            currentValue--;
+            
         }
 
-        return ++squaresNumber;
+        return squares.Count;
+    }
+
+    private static bool IsSqure(int i)
+    {
+        var sqrt = Math.Sqrt(i);
+        if (int.TryParse(sqrt.ToString(), out int intValue))
+            return true;
+        return false;
     }
 
 }
