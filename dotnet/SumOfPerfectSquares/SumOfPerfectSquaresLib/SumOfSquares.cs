@@ -1,36 +1,18 @@
 ﻿namespace SumOfPerfectSquaresLib;
 public static class SumOfSquares
 {
-    public static int NSquaresFor(int i)
+    public static int NSquaresFor(int n)
     {
-        var squares = new List<int>();
-        var currentValue = i;
-        var squaresSum = 0;
-        while (squaresSum - i != 0)
+        var target = n;
+        for (int i = 1; i <= n; i++)
         {
-            if (squaresSum < 0)
-                throw new InvalidOperationException();
-            if (IsSqure(currentValue))
-            {
-                squares.Add(currentValue);
-                squaresSum += currentValue;
-                currentValue = i - squaresSum;
-                continue;
-            }
-
-            currentValue--;
-            
+            var square = i * i;
+            if (square > n)
+                break;
+            target = Math.Min(target, 1 + NSquaresFor(n - square));
         }
 
-        return squares.Count;
-    }
-
-    private static bool IsSqure(int i)
-    {
-        var sqrt = Math.Sqrt(i);
-        if (int.TryParse(sqrt.ToString(), out int intValue))
-            return true;
-        return false;
+        return target;
     }
 
 }
