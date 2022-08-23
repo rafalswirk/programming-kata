@@ -10,7 +10,16 @@ namespace Problems.ArraysAndHashing
     {
         public int[] Get(int[] input, int target)
         {
-            throw new NotImplementedException();
+            var hashMap = new Dictionary<int, int>();
+            for (int i = 0; i < input.Length; i++)
+            {
+                var difference = target - input[i];
+                if (hashMap.ContainsKey(difference))
+                    return new int[] { hashMap[difference], i };
+                hashMap.Add(input[i], i);
+            }
+
+            return new int[0];
         }
     }
 }
