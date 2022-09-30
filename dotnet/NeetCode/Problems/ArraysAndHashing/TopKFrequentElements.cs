@@ -39,5 +39,12 @@ namespace Problems.ArraysAndHashing
 
             return Array.Empty<int>();
         }
+
+        public int[] GetElementsLinq(int[] input, int k)
+        {
+            var groups = input.GroupBy(i => i);
+            var orderedGroups = groups.OrderByDescending(g => g.Count());
+            return orderedGroups.Take(2).Select(g => g.Key).ToArray();
+        }
     }
 }

@@ -27,5 +27,19 @@ namespace Problems.Test.ArraysAndHashingTests
                 Assert.That(expectedResult.Contains(elements[i]), Is.True);
             }
         }
+
+        [TestCase(new int[] { 1, 1, 1, 2, 2, 3 }, 2, new int[] { 1, 2 })]
+        public void TopKFrequentLinqTest(int[] input, int k, int[] expectedResult)
+        {
+            var topKFrequent = new TopKFrequentElements();
+
+            int[] elements = topKFrequent.GetElementsLinq(input, k);
+
+            Assert.That(elements.Count(), Is.EqualTo(k));
+            for (int i = 0; i < k; i++)
+            {
+                Assert.That(expectedResult.Contains(elements[i]), Is.True);
+            }
+        }
     }
 }
